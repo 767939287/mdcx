@@ -61,7 +61,9 @@ async def test_get_emby_actor_list_uses_jellyfin_actor_endpoint(monkeypatch: pyt
     assert actor_list == [{"Name": "演员A"}]
     assert parsed.scheme == "http"
     assert parsed.netloc == "127.0.0.1:8096"
-    assert parsed.path == "/Persons"
+    assert parsed.path == "/Items"
+    # 2. 增加 includeItemTypes 参数断言
+    assert query["includeItemTypes"] == ["Person"]
     assert query["personTypes"] == ["Actor"]
     assert query["fields"] == [",".join(emby_actor_image.JELLYFIN_PERSON_FIELDS)]
     assert query["enableImages"] == ["true"]

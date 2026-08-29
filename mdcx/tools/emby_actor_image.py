@@ -100,8 +100,9 @@ async def _get_emby_actor_list() -> list[dict]:
         server_name = "Jellyfin"
         headers = _build_jellyfin_headers()
         url = _append_query(
-            base_url + "/Persons",
+            base_url + "/Items",  # 修改路径为 /Items
             {
+                "includeItemTypes": "Person",  # 新增指定获取对象类型为 Person
                 "personTypes": "Actor",
                 "fields": ",".join(JELLYFIN_PERSON_FIELDS),
                 "enableImages": "true",
